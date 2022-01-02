@@ -13,3 +13,147 @@
  *= require_tree .
  *= require_self
  */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+  padding: 10px;
+  flex: 0 0 10%;
+}
+
+#sidebar {
+  padding: 10px;
+  border-right: 1px solid #eeeeee;
+  flex-basis: 30%;
+}
+
+#content {
+  flex-basis: 70%;
+  padding: 10px;
+}
+
+#main {
+  display: flex;
+  flex: 1;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.task {
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px !important;
+}
+
+.label {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #eee;
+  flex: 0;
+}
+
+#tasklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #eee;
+  width: 80%;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.field {
+  display: flex;
+  gap: 10px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+button {
+  color: white;
+  background-color: lightslategray;
+}
+
+button:hover {
+  background-color: #eee;
+  color: #555;
+}
+
+.field > * {
+  flex: 1 0 50%;
+}
+
+label {
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+}
+
+.right {
+  justify-self: flex-end;
+}
+
+.split {
+  justify-content: space-between;
+}
+
+.row > * {
+  width: initial !important;
+}
+
+input[type="checkbox"] + p {
+  margin-bottom: auto !important;
+}

@@ -1,7 +1,14 @@
+import Content from "./Content";
+import Sidebar from "./Sidebar";
 import React from "react";
 
-const Home = () => {
-  return ( <div>what</div> );
-}
- 
+const Home = ({ tasks }) => {
+  return (
+    <div id="main">
+      <Sidebar />
+      <Content tasks={tasks} />
+    </div>
+  );
+};
+
 export default Home;
