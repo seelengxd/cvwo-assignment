@@ -11,7 +11,7 @@ const Content = ({ tasks, deleteTask }) => {
   const showAll = () => {
     setDisplayed([...tasks]);
   };
-  useEffect(showAll, []);
+  useEffect(showAll, [tasks]);
   return (
     <div id="content">
       <div className="row">

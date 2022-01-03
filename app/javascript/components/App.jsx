@@ -35,14 +35,22 @@ function App() {
     getTasksFromServer();
   };
 
-  const getTask = (id) => {
-    return tasks.find((task) => task.id === id);
-  };
-
   const deleteTask = (id) => {
+    console.log({ id });
     axios
       .delete("/api/v1/tasks/" + id)
       .then(() => getTasksFromServer())
+      // for some reason (prob to do with async) getTasks is getting results before rails deletes
+      // manual filtering it out
+      .then(() =>
+        setTasks(
+          tasks.filter((task) => {
+            console.log(task);
+            return task.id !== id;
+          })
+        )
+      )
+      .then(() => console.log(tasks))
       .catch((e) => console.error(e));
   };
 
@@ -51,12 +59,11 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          {tasks && (
-            <Route
-              path="/"
-              element={<Home tasks={tasks} deleteTask={deleteTask} />}
-            />
-          )}
+          <Route
+            path="/"
+            element={tasks && <Home tasks={tasks} deleteTask={deleteTask} />}
+          />
+
           <Route
             path="/addtask"
             element={<TaskForm formTitle="Add Task" handleData={addTask} />}

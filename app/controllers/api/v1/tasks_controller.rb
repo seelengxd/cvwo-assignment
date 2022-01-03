@@ -16,12 +16,12 @@ class Api::V1::TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
     render json: @task
-  
   end
 
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
+    render json: { 'message': 'Task successfully deleted!' }
   end
 
   private
