@@ -154,6 +154,18 @@ a {
   width: initial !important;
 }
 
-input[type="checkbox"] + p {
-  margin-bottom: auto !important;
+.row > p {
+  margin-bottom: 0 !important;
+}
+
+.Low {
+  background-color: lightgreen;
+}
+
+.Medium {
+  background-color: lightsalmon;
+}
+
+.High {
+  background-color: plum;
 }

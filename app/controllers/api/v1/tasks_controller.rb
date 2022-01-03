@@ -15,7 +15,10 @@ class Api::V1::TasksController < ApplicationController
 
   def show; end
 
-  def destroy; end
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+  end
 
   private
 

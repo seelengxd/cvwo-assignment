@@ -6,7 +6,9 @@ const Sidebar = () => {
       <div className="row">
         <h3>Projects</h3>
         <Link to="#">
-          <button>+ Add Project</button>
+          <button>
+            <i className="fas fa-plus"></i> Add Project
+          </button>
         </Link>
       </div>
     </div>

@@ -29,6 +29,7 @@ function App() {
 
   const addTask = (task) => {
     task.done = false;
+    task.due_date = task.dueDate;
     axios.post("/api/v1/tasks", task).then((resp) => console.log(resp));
     getTasksFromServer();
   };
@@ -38,7 +39,10 @@ function App() {
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    axios
+      .delete("/api/v1/tasks/" + id)
+      .then(() => getTasksFromServer())
+      .catch((e) => console.error(e));
   };
 
   return (
@@ -46,7 +50,10 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home tasks={tasks} />} />
+          <Route
+            path="/"
+            element={<Home tasks={tasks} deleteTask={deleteTask} />}
+          />
           <Route
             path="/addtask"
             element={<TaskForm formTitle="Add Task" handleData={addTask} />}
