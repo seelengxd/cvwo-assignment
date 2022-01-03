@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Task.delete_all
+
+3.times do |i|
+  Task.create(title: "Task #{i + 1}",
+              description: 'Task description',
+              due_date: Date.new(2021, 11, 11) + rand(30),
+              done: false,
+              importance: ['Low', 'Medium', 'High'][rand(3)])
+end

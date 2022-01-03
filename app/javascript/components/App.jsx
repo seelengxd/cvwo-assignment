@@ -1,8 +1,4 @@
 import React from "react";
-// import Routes from "../routes/Index";
-
-// export default props => <>{Routes}</>;
-
 import Navbar from "./Navbar";
 import { useState } from "react";
 import {
@@ -19,6 +15,7 @@ function App() {
     {
       title: "Task 1",
       importance: "Low",
+      id: 1,
     },
   ]);
   let newID = 3;
