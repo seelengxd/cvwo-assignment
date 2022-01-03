@@ -9,22 +9,28 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 import TaskForm from "./TaskForm";
+import axios from "axios";
 
 function App() {
+  const token = document.querySelector("[name=csrf-token]").content;
+  axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+
   const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-    fetch("/api/v1/tasks")
-      .then((resp) => resp.json())
-      .then((json) => setTasks(json))
+  const getTasksFromServer = () => {
+    axios
+      .get("/api/v1/tasks")
+      .then((resp) => {
+        setTasks(resp.data);
+      })
       .catch((e) => console.error(e));
-  }, []);
-  let newID = 3;
+  };
+
+  useEffect(getTasksFromServer, []);
 
   const addTask = (task) => {
-    task.id = newID;
     task.done = false;
-    newID += 1;
-    setTasks([...tasks, task]);
+    axios.post("/api/v1/tasks", task).then((resp) => console.log(resp));
+    getTasksFromServer();
   };
 
   const getTask = (id) => {
