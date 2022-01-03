@@ -176,9 +176,15 @@ a {
 }
 
 .view {
-  margin: 10px;
+  margin: 10px auto;
+  width: 80%;
 }
 
 .row > a {
   padding: 0;
+}
+
+.view > h1 {
+  text-align: center;
+  text-decoration: underline;
 }

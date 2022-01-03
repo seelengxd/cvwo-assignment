@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import formatDate from "../formatDate";
 const Task = ({ task, deleteTask }) => {
   return (
     <div className="task">
@@ -10,12 +11,14 @@ const Task = ({ task, deleteTask }) => {
         <div className="row">
           <input type="checkbox"></input>
           <p>{task.title}</p>
-          {task.due_date && (
-            <p>
-              <i className="far fa-clock"></i> {task.due_date}
-            </p>
-          )}
         </div>
+      </div>
+      <div className="row">
+        {task.due_date && (
+          <p>
+            <i className="far fa-clock"></i> {formatDate(task.due_date)}
+          </p>
+        )}
       </div>
       <div className="row">
         <Link to={"/viewtask/" + task.id}>

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { useParams } from "react-router-dom";
-
 import { useState, useEffect } from "react";
+import formatDate from "../formatDate";
 
 const ViewTask = () => {
   const params = useParams();
@@ -17,8 +17,17 @@ const ViewTask = () => {
   return (
     <div className="task view">
       <h1>{task.title}</h1>
-      <p>{task.description}</p>
+      <p>Description: {task.description}</p>
       <p>Importance: {task.importance}</p>
+      <p>Due date: {task.due_date && formatDate(task.due_date)}</p>
+      <p>
+        Done:{" "}
+        {task.done ? (
+          <i className="fas fa-check-square"></i>
+        ) : (
+          <i className="fas fa-times"></i>
+        )}
+      </p>
     </div>
   );
 };
