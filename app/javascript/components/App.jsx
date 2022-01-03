@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,13 +11,13 @@ import Home from "./Home";
 import TaskForm from "./TaskForm";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      title: "Task 1",
-      importance: "Low",
-      id: 1,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    fetch("/api/v1/tasks")
+      .then((resp) => resp.json())
+      .then((json) => setTasks(json))
+      .catch((e) => console.error(e));
+  }, []);
   let newID = 3;
 
   const addTask = (task) => {
