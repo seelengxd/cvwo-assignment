@@ -13,7 +13,11 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @task = Task.find(params[:id])
+    render json: @task
+  
+  end
 
   def destroy
     @task = Task.find(params[:id])

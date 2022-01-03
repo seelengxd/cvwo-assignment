@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const Task = ({ task, deleteTask }) => {
   return (
     <div className="task">
@@ -17,13 +18,15 @@ const Task = ({ task, deleteTask }) => {
         </div>
       </div>
       <div className="row">
-        <button>
-          <i className="far fa-eye"></i> View
-        </button>
+        <Link to={"/viewtask/" + task.id}>
+          <button>
+            <i className="far fa-eye"></i> View
+          </button>
+        </Link>
         <button>
           <i className="far fa-edit"></i> Edit
         </button>
-        <button onClick={deleteTask}>
+        <button className="delete" onClick={deleteTask}>
           <i className="fas fa-trash-alt"></i> Delete
         </button>
       </div>

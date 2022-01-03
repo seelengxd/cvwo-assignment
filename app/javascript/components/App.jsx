@@ -10,12 +10,13 @@ import {
 import Home from "./Home";
 import TaskForm from "./TaskForm";
 import axios from "axios";
+import ViewTask from "./ViewTask";
 
 function App() {
   const token = document.querySelector("[name=csrf-token]").content;
   axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(null);
   const getTasksFromServer = () => {
     axios
       .get("/api/v1/tasks")
@@ -50,14 +51,17 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={<Home tasks={tasks} deleteTask={deleteTask} />}
-          />
+          {tasks && (
+            <Route
+              path="/"
+              element={<Home tasks={tasks} deleteTask={deleteTask} />}
+            />
+          )}
           <Route
             path="/addtask"
             element={<TaskForm formTitle="Add Task" handleData={addTask} />}
           />
+          <Route path="/viewtask/:id" element={<ViewTask />}></Route>
         </Routes>
       </Router>
     </div>

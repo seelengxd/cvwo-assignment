@@ -169,3 +169,16 @@ a {
 .High {
   background-color: plum;
 }
+
+.delete {
+  background-color: tomato;
+  border: 1px solid red;
+}
+
+.view {
+  margin: 10px;
+}
+
+.row > a {
+  padding: 0;
+}
