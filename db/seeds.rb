@@ -9,13 +9,14 @@
 Task.delete_all
 Project.delete_all
 
-project = Project.create(name: 'Project 1')
-
-3.times do |i|
-  task = project.tasks.build(title: "Task #{i + 1}",
-                             description: 'Task description',
-                             due_date: Date.new(2021, 11, 11) + rand(30),
-                             done: false,
-                             importance: %w[Low Medium High][rand(3)])
-  task.save
+2.times do |p|
+  project = Project.create(name: "Project #{p}")
+  3.times do |i|
+    task = project.tasks.build(title: "Task #{i + 1}",
+                               description: 'Task description',
+                               due_date: Date.new(2021, 11, 11) + rand(30),
+                               done: false,
+                               importance: %w[Low Medium High][rand(3)])
+    task.save
+  end
 end

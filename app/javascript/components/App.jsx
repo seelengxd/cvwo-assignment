@@ -18,16 +18,27 @@ function App() {
   axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
 
   const [tasks, setTasks] = useState(null);
-  const getTasksFromServer = () => {
-    axios
-      .get("/api/v1/tasks")
-      .then((resp) => {
-        setTasks(resp.data);
-      })
-      .catch((e) => console.error(e));
-  };
+  const [projects, setProjects] = useState([]);
+  const [currentProject, setCurrentProject] = useState({});
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  async function getProjectsFromServer() {
+    console.log("run projects");
+    const resp = await axios.get("/api/v1/projects");
+    setProjects(resp.data);
+    setLoadingProjects(false);
+  }
+  async function getTasksFromServer() {
+    if (!loadingProjects) {
+      const resp = await axios.get("/api/v1/projects/" + currentProject.id);
+      console.log({ tasks: resp.data });
+      setTasks(resp.data.tasks);
+    }
+  }
 
-  useEffect(getTasksFromServer, []);
+  useEffect(getProjectsFromServer, []);
+  useEffect(() => setCurrentProject(projects[0]), [projects]);
+  useEffect(getTasksFromServer, [currentProject]);
+  // useEffect(initialize, []);
 
   const addTask = (task) => {
     task.done = false;
@@ -71,7 +82,18 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={tasks && <Home tasks={tasks} deleteTask={deleteTask} />}
+            element={
+              tasks ? (
+                <Home
+                  tasks={tasks}
+                  projects={projects}
+                  deleteTask={deleteTask}
+                  changeProject={setCurrentProject}
+                />
+              ) : (
+                <h1>Loading...</h1>
+              )
+            }
           />
 
           <Route
