@@ -191,6 +191,16 @@ a {
 }
 .project {
   padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project > p {
+  flex: 0 0 70%;
+}
+
+.project > button {
+  flex: 0 0 30px;
 }
 .project:hover {
   background-color: darkred;

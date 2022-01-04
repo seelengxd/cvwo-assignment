@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Project = ({ project, changeProject, selected }) => {
   return (
@@ -6,7 +7,12 @@ const Project = ({ project, changeProject, selected }) => {
       className={"project " + (selected ? "selected-project" : "")}
       onClick={changeProject}
     >
-      {project.name}
+      <p>{project.name}</p>
+      <Link to={"/editproject/" + project.id}>
+        <button>
+          <i className="far fa-edit"></i>
+        </button>
+      </Link>
     </div>
   );
 };

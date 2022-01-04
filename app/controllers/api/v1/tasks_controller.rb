@@ -28,7 +28,6 @@ class Api::V1::TasksController < ApplicationController
   def update
     if @task.update(task_params)
       render json: { 'message': 'Task successfully updated!' }
-      p @task
     else
       render json: { 'error': @task.errors.full_messages }
     end

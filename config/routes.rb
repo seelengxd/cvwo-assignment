@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :tasks, only: %i[index create show destroy update]
-      resources :projects, only: %i[index show create]
+      resources :projects, only: %i[index show create update]
     end
   end
   root 'homepage#index'
