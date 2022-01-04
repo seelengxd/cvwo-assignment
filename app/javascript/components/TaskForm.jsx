@@ -2,11 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const TaskForm = ({ handleData, formTitle }) => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [importance, setImportance] = useState("Low");
+const TaskForm = ({ handleData, formTitle, task }) => {
+  console.log(task);
+  const [title, setTitle] = useState(task?.title || "");
+  const [desc, setDesc] = useState(task?.description || "");
+  const [dueDate, setDueDate] = useState(task?.due_date || "");
+  const [importance, setImportance] = useState(task?.importance || "Low");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +61,7 @@ const TaskForm = ({ handleData, formTitle }) => {
           <option value="High">High</option>
         </select>
       </div>
-      <button type="submit">Add Task</button>
+      <button type="submit">{formTitle}</button>
     </form>
   );
 };

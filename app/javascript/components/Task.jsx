@@ -26,9 +26,12 @@ const Task = ({ task, deleteTask }) => {
             <i className="far fa-eye"></i> View
           </button>
         </Link>
-        <button>
-          <i className="far fa-edit"></i> Edit
-        </button>
+        <Link to={"/edittask/" + task.id}>
+          <button>
+            <i className="far fa-edit"></i> Edit
+          </button>
+        </Link>
+
         <button className="delete" onClick={deleteTask}>
           <i className="fas fa-trash-alt"></i> Delete
         </button>

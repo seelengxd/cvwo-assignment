@@ -11,6 +11,7 @@ import Home from "./Home";
 import TaskForm from "./TaskForm";
 import axios from "axios";
 import ViewTask from "./ViewTask";
+import EditTask from "./EditTask";
 
 function App() {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -36,7 +37,6 @@ function App() {
   };
 
   const deleteTask = (id) => {
-    console.log({ id });
     axios
       .delete("/api/v1/tasks/" + id)
       .then(() => getTasksFromServer())
@@ -50,7 +50,17 @@ function App() {
           })
         )
       )
-      .then(() => console.log(tasks))
+      .catch((e) => console.error(e));
+  };
+
+  const editTask = (id) => (task) => {
+    task.due_date = task.dueDate;
+    console.log({ task });
+    axios
+      .put("/api/v1/tasks/" + id, task)
+      .then((resp) => console.log(resp))
+      .then(() => getTasksFromServer())
+
       .catch((e) => console.error(e));
   };
 
@@ -67,6 +77,10 @@ function App() {
           <Route
             path="/addtask"
             element={<TaskForm formTitle="Add Task" handleData={addTask} />}
+          />
+          <Route
+            path="/edittask/:id"
+            element={<EditTask editTask={editTask} />}
           />
           <Route path="/viewtask/:id" element={<ViewTask />}></Route>
         </Routes>
