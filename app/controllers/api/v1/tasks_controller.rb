@@ -7,7 +7,8 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @project = Project.find(project_id)
+    @task = @project.tasks.build(task_params)
     if @task.save
       render json: { 'message': 'Task successfully saved!' }
     else
@@ -40,6 +41,10 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def task_params
-    params.permit(:title, :description, :due_date, :importance, :done)
+    params.require(:task).permit(:title, :description, :due_date, :importance, :done)
+  end
+
+  def project_id
+    params.permit(:project_id)[:project_id]
   end
 end

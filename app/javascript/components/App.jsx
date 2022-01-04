@@ -43,8 +43,10 @@ function App() {
   const addTask = (task) => {
     task.done = false;
     task.due_date = task.dueDate;
-    axios.post("/api/v1/tasks", task).then((resp) => console.log(resp));
-    getTasksFromServer();
+    axios
+      .post("/api/v1/tasks", { task, project_id: currentProject.id })
+      .then((resp) => console.log(resp))
+      .then(() => getTasksFromServer());
   };
 
   const deleteTask = (id) => {
@@ -66,7 +68,6 @@ function App() {
 
   const editTask = (id) => (task) => {
     task.due_date = task.dueDate;
-    console.log({ task });
     axios
       .put("/api/v1/tasks/" + id, task)
       .then((resp) => console.log(resp))
