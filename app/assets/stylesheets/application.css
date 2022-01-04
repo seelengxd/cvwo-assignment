@@ -175,7 +175,7 @@ a {
 
 .delete {
   background-color: tomato;
-  border: 1px solid red;
+  border: 2px solid red;
 }
 
 .view {
@@ -224,4 +224,8 @@ header > .left > h2 > a {
 
 .project > .right {
   min-width: 80px;
+}
+
+.row > a {
+  margin: 0;
 }

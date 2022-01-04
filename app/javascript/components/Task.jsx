@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import formatDate from "../formatDate";
-const Task = ({ task, deleteTask }) => {
+const Task = ({ task, deleteTask, changeDone }) => {
   return (
     <div className="task">
       <div className="row">
@@ -9,7 +9,14 @@ const Task = ({ task, deleteTask }) => {
       </div>
       <div className="row">
         <div className="row">
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            checked={task.done}
+            onChange={(e) => {
+              console.log(e);
+              changeDone(!task.done);
+            }}
+          ></input>
           <p>{task.title}</p>
         </div>
       </div>
@@ -32,9 +39,11 @@ const Task = ({ task, deleteTask }) => {
           </button>
         </Link>
 
-        <button className="delete" onClick={deleteTask}>
-          <i className="fas fa-trash-alt"></i> Delete
-        </button>
+        <a>
+          <button className="delete" onClick={deleteTask}>
+            <i className="fas fa-trash-alt"></i> Delete
+          </button>
+        </a>
       </div>
     </div>
   );

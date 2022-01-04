@@ -9,6 +9,7 @@ const Home = ({
   changeProject,
   currentProject,
   deleteProject,
+  changeDone,
 }) => {
   return (
     <div id="main">
@@ -18,7 +19,7 @@ const Home = ({
         currentProject={currentProject}
         deleteProject={deleteProject}
       />
-      <Content tasks={tasks} deleteTask={deleteTask} />
+      <Content tasks={tasks} deleteTask={deleteTask} changeDone={changeDone} />
     </div>
   );
 };

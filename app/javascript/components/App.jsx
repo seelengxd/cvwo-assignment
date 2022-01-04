@@ -82,10 +82,23 @@ function App() {
     task.due_date = task.dueDate;
     axios
       .put("/api/v1/tasks/" + id, task)
-      .then((resp) => console.log(resp))
       .then(() => getTasksFromServer())
 
       .catch((e) => console.error(e));
+  };
+
+  const changeDone = (id) => (done) => {
+    const task = tasks.find((task) => task.id === id);
+    if (task) {
+      console.log(task);
+      axios
+        .put("/api/v1/tasks/" + id, { done })
+        .then((resp) => console.log(resp))
+        .then(() => getTasksFromServer())
+
+        .catch((e) => console.error(e));
+    }
+    console.log({ id, task });
   };
 
   const addProject = (project) => {
@@ -128,6 +141,7 @@ function App() {
                   changeProject={setCurrentProject}
                   currentProject={currentProject}
                   deleteProject={deleteProject}
+                  changeDone={changeDone}
                 />
               ) : (
                 <h1>Loading...</h1>

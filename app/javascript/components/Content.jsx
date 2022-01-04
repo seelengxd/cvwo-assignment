@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Task from "./Task";
 
-const Content = ({ tasks, deleteTask }) => {
+const Content = ({ tasks, deleteTask, changeDone }) => {
   const [query, setQuery] = useState("");
   const [displayed, setDisplayed] = useState(null);
+  const sort = (tasks) => {
+    console.log("hello?");
+    console.log(tasks.sort((t1, t2) => (t1.title < t2.title ? -1 : 1)));
+    return tasks.sort((t1, t2) => t1.title < t2.title);
+  };
   const filter = () => {
     setDisplayed(tasks.filter((task) => task.title.includes(query)));
   };
@@ -35,11 +40,12 @@ const Content = ({ tasks, deleteTask }) => {
 
       <div id="tasklist">
         {displayed &&
-          displayed.map((task) => (
+          sort(displayed).map((task) => (
             <Task
               task={task}
               key={task.id}
               deleteTask={() => deleteTask(task.id)}
+              changeDone={changeDone(task.id)}
             />
           ))}
       </div>

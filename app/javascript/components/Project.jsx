@@ -16,6 +16,7 @@ const Project = ({ project, changeProject, selected, deleteProject }) => {
         </Link>
 
         <button
+          className="delete"
           onClick={(e) => {
             e.stopPropagation();
             deleteProject();
