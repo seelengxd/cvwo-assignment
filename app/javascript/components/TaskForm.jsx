@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const TaskForm = ({ handleData, formTitle, task }) => {
-  console.log(task);
   const [title, setTitle] = useState(task?.title || "");
   const [desc, setDesc] = useState(task?.description || "");
   const [dueDate, setDueDate] = useState(task?.due_date || "");

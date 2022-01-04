@@ -12,6 +12,7 @@ import TaskForm from "./TaskForm";
 import axios from "axios";
 import ViewTask from "./ViewTask";
 import EditTask from "./EditTask";
+import ProjectForm from "./ProjectForm";
 
 function App() {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -76,6 +77,13 @@ function App() {
       .catch((e) => console.error(e));
   };
 
+  const addProject = (project) => {
+    axios
+      .post("/api/v1/projects", { project })
+      .then(getProjectsFromServer)
+      .catch((e) => console.error(e));
+  };
+
   return (
     <div className="App">
       <Router>
@@ -107,6 +115,12 @@ function App() {
             element={<EditTask editTask={editTask} />}
           />
           <Route path="/viewtask/:id" element={<ViewTask />}></Route>
+          <Route
+            path="/addproject"
+            element={
+              <ProjectForm formTitle={"Add Project"} handleData={addProject} />
+            }
+          ></Route>
         </Routes>
       </Router>
     </div>

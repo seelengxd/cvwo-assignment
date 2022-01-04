@@ -6,7 +6,7 @@ const Sidebar = ({ projects, changeProject, currentProject }) => {
     <div id="sidebar">
       <div className="row">
         <h3>Projects</h3>
-        <Link to="#">
+        <Link to="/addproject">
           <button>
             <i className="fas fa-plus"></i> Add Project
           </button>
