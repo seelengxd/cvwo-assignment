@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show update]
+  before_action :set_project, only: %i[show update destroy]
   def index
     @projects = Project.all
     render json: @projects
@@ -24,6 +24,11 @@ class Api::V1::ProjectsController < ApplicationController
     else
       render json: { 'error': @project.errors.full_messages }
     end
+  end
+
+  def destroy
+    @project.destroy
+    render json: { 'message': 'Project successfully deleted!' }
   end
 
   private

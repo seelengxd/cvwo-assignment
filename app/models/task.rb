@@ -5,4 +5,5 @@ class Task < ApplicationRecord
   end
 
   belongs_to :project
+  validates :title, presence:true
 end

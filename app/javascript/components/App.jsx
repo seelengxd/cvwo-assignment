@@ -28,17 +28,27 @@ function App() {
     const resp = await axios.get("/api/v1/projects");
     setProjects(resp.data);
     setLoadingProjects(false);
+    if (resp.data.length === 0) {
+      addProject({ name: "Default Project" });
+    }
   }
   async function getTasksFromServer() {
     if (!loadingProjects) {
-      const resp = await axios.get("/api/v1/projects/" + currentProject.id);
-      console.log({ tasks: resp.data });
-      setTasks(resp.data.tasks);
+      if (currentProject !== null) {
+        const resp = await axios.get("/api/v1/projects/" + currentProject.id);
+        setTasks(resp.data.tasks);
+      } else {
+        setTasks([]);
+      }
     }
   }
 
   useEffect(getProjectsFromServer, []);
-  useEffect(() => setCurrentProject(projects[0]), [projects]);
+  useEffect(() => {
+    if (projects.length > 0) {
+      setCurrentProject(projects[0]);
+    }
+  }, [projects]);
   useEffect(getTasksFromServer, [currentProject]);
   // useEffect(initialize, []);
 
@@ -92,6 +102,16 @@ function App() {
       .catch((e) => console.error(e));
   };
 
+  const deleteProject = (id) => {
+    axios
+      .delete("/api/v1/projects/" + id)
+      .then(() => getProjectsFromServer())
+      .then(() => {
+        if (projects.length == 0) setTasks([]);
+      })
+      .catch((e) => console.error(e));
+  };
+
   return (
     <div className="App">
       <Router>
@@ -100,13 +120,14 @@ function App() {
           <Route
             path="/"
             element={
-              tasks ? (
+              tasks !== null ? (
                 <Home
                   tasks={tasks}
                   projects={projects}
                   deleteTask={deleteTask}
                   changeProject={setCurrentProject}
                   currentProject={currentProject}
+                  deleteProject={deleteProject}
                 />
               ) : (
                 <h1>Loading...</h1>

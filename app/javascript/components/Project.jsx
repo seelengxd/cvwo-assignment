@@ -1,18 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Project = ({ project, changeProject, selected }) => {
+const Project = ({ project, changeProject, selected, deleteProject }) => {
   return (
     <div
       className={"project " + (selected ? "selected-project" : "")}
       onClick={changeProject}
     >
       <p>{project.name}</p>
-      <Link to={"/editproject/" + project.id}>
-        <button>
-          <i className="far fa-edit"></i>
+      <div className="right">
+        <Link to={"/editproject/" + project.id}>
+          <button>
+            <i className="far fa-edit"></i>
+          </button>
+        </Link>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteProject();
+          }}
+        >
+          <i className="fas fa-trash-alt"></i>
         </button>
-      </Link>
+      </div>
     </div>
   );
 };

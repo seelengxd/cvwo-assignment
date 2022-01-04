@@ -8,6 +8,7 @@ const Home = ({
   projects,
   changeProject,
   currentProject,
+  deleteProject,
 }) => {
   return (
     <div id="main">
@@ -15,6 +16,7 @@ const Home = ({
         projects={projects}
         changeProject={changeProject}
         currentProject={currentProject}
+        deleteProject={deleteProject}
       />
       <Content tasks={tasks} deleteTask={deleteTask} />
     </div>

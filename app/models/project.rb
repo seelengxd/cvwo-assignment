@@ -1,3 +1,4 @@
 class Project < ApplicationRecord
-  has_many :tasks
+  validates :name, presence: true
+  has_many :tasks, dependent: :destroy
 end
