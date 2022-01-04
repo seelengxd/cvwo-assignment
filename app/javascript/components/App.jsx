@@ -89,6 +89,7 @@ function App() {
                   projects={projects}
                   deleteTask={deleteTask}
                   changeProject={setCurrentProject}
+                  currentProject={currentProject}
                 />
               ) : (
                 <h1>Loading...</h1>

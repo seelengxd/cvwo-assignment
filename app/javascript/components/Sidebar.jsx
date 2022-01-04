@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Project from "./Project";
-const Sidebar = ({ projects, changeProject }) => {
+const Sidebar = ({ projects, changeProject, currentProject }) => {
   return (
     <div id="sidebar">
       <div className="row">
@@ -19,6 +19,7 @@ const Sidebar = ({ projects, changeProject }) => {
               project={project}
               key={project.id}
               changeProject={() => changeProject(project)}
+              selected={currentProject === project}
             />
           ))
         ) : (

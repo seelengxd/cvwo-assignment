@@ -18,6 +18,7 @@
 
 * {
   box-sizing: border-box;
+  transition-duration: 0.25s;
 }
 body {
   font-family: "Nunito", sans-serif;
@@ -187,4 +188,18 @@ a {
 .view > h1 {
   text-align: center;
   text-decoration: underline;
+}
+.project {
+  padding: 5px;
+}
+.project:hover {
+  background-color: darkred;
+  border-left: 5px solid sandybrown;
+  color: white;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.selected-project {
+  background-color: lightskyblue;
 }
