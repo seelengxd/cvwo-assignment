@@ -14,6 +14,7 @@ import ViewTask from "./ViewTask";
 import EditTask from "./EditTask";
 import ProjectForm from "./ProjectForm";
 import EditProject from "./EditProject";
+import SignUp from "./SignUp";
 
 function App() {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -125,6 +126,13 @@ function App() {
       .catch((e) => console.error(e));
   };
 
+  const signUp = (data) => {
+    axios
+      .post("/api/v1/users", { user: data })
+      .then((resp) => console.log(resp))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <div className="App">
       <Router>
@@ -148,6 +156,7 @@ function App() {
               )
             }
           />
+          <Route path="/signup" element={<SignUp signUp={signUp} />} />
 
           <Route
             path="/addtask"

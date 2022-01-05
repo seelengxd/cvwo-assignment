@@ -5,6 +5,11 @@ Rails.application.routes.draw do
       resources :projects, only: %i[index show create update destroy]
     end
   end
+  scope :api, defaults: { format: :json } do
+    scope :v1 do
+      devise_for :users
+    end
+  end
   root 'homepage#index'
   get '/*path', to: 'homepage#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

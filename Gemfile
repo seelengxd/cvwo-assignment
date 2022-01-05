@@ -8,8 +8,7 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
-# trying to get sqlite3
-gem 'sqlite3', '~> 1.4', '>= 1.4.2'
+gem 'devise', '~> 4.8', '>= 4.8.1'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.0'

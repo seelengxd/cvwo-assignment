@@ -6,8 +6,6 @@ const Content = ({ tasks, deleteTask, changeDone }) => {
   const [query, setQuery] = useState("");
   const [displayed, setDisplayed] = useState(null);
   const sort = (tasks) => {
-    console.log("hello?");
-    console.log(tasks.sort((t1, t2) => (t1.title < t2.title ? -1 : 1)));
     return tasks.sort((t1, t2) => t1.title < t2.title);
   };
   const filter = () => {
