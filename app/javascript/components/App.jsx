@@ -24,6 +24,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [currentProject, setCurrentProject] = useState({});
   const [loadingProjects, setLoadingProjects] = useState(true);
+  const [user, username] = useState({});
   async function getProjectsFromServer() {
     console.log("run projects");
     const resp = await axios.get("/api/v1/projects");
