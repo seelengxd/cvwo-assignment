@@ -22,6 +22,8 @@ Its features include:
 Try running...
 
 ```bash
+bundle install
+yarn install
 rails db:create
 rails db:migrate
 rails db:seed
