@@ -12,14 +12,12 @@ const Navbar = ({ user, logOut }) => {
       <div className="right">
         {user?.username ? (
           <div className="row">
-            <Link to="/" onClick={logOut}>
-              Log out
-            </Link>
+            <button onClick={logOut}>Log out</button>
             <h2>{user?.username}</h2>
           </div>
         ) : (
           <div className="row">
-            <Link to="/">Sign in</Link>
+            <Link to="/signin">Sign in</Link>
             <Link to="/signup">Sign up</Link>
           </div>
         )}

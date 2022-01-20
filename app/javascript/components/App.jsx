@@ -147,6 +147,7 @@ function App() {
   };
 
   const logOut = () => {
+    console.log("run");
     axios
       .delete("/api/v1/users/sign_out")
       .then((resp) => setUser({}))
@@ -156,7 +157,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar user={user} />
+        <Navbar user={user} logOut={logOut} />
         <Routes>
           <Route
             path="/"
@@ -178,7 +179,7 @@ function App() {
           />
           <Route
             path="/signup"
-            element={<SignUp signUp={signUp} user={user} logOut={logOut} />}
+            element={<SignUp signUp={signUp} user={user} />}
           />
           <Route path="/signin" element={<SignIn signIn={signIn} />} />
 
