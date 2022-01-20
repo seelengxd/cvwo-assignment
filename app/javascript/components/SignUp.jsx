@@ -1,16 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = ({ signUp }) => {
+const SignUp = ({ signUp, user }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const [errors, setErrors] = useState({});
+  const [hasError, setHasError] = useState(false);
+  const [running, setRunning] = useState(false);
+
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  async function handleError(e) {
+    setHasError(true);
+    setErrors(e.data.errors);
+    setRunning(false);
+  }
+  async function handleSubmit(e) {
     e.preventDefault();
-    signUp({ username, email, password });
-    navigate("/");
-  };
+    setRunning(true);
+    await signUp({ username, email, password }, handleError);
+    await sleep(3000);
+    setRunning(false);
+    if (user?.username) navigate("/");
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,6 +44,7 @@ const SignUp = ({ signUp }) => {
           required
         />
       </div>
+      {hasError && <div className="delete">Error: Email {errors.email}</div>}
       <div className="field">
         <label>Email:</label>
         <input

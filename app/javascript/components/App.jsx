@@ -15,6 +15,7 @@ import EditTask from "./EditTask";
 import ProjectForm from "./ProjectForm";
 import EditProject from "./EditProject";
 import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
 function App() {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -127,11 +128,29 @@ function App() {
       .catch((e) => console.error(e));
   };
 
-  const signUp = (data) => {
+  async function signUp(data, handleError) {
+    try {
+      let resp = await axios.post("/api/v1/users", { user: data });
+      console.log(resp);
+      setUser(resp.data);
+    } catch (err) {
+      console.log(err.response);
+      handleError(err.response);
+    }
+  }
+
+  const signIn = (data) => {
     axios
-      .post("/api/v1/users", { user: data })
+      .post("/api/v1/users/sign_in", { user: data })
       .then((resp) => setUser(resp.data))
       .catch((e) => console.log(e));
+  };
+
+  const logOut = () => {
+    axios
+      .delete("/api/v1/users/sign_out")
+      .then((resp) => setUser({}))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -157,7 +176,11 @@ function App() {
               )
             }
           />
-          <Route path="/signup" element={<SignUp signUp={signUp} />} />
+          <Route
+            path="/signup"
+            element={<SignUp signUp={signUp} user={user} logOut={logOut} />}
+          />
+          <Route path="/signin" element={<SignIn signIn={signIn} />} />
 
           <Route
             path="/addtask"
