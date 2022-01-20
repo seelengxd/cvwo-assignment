@@ -16,6 +16,7 @@ import ProjectForm from "./ProjectForm";
 import EditProject from "./EditProject";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import PrivateRoute from "../routes/PrivateRoute";
 
 function App() {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -26,6 +27,8 @@ function App() {
   const [currentProject, setCurrentProject] = useState({});
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [user, setUser] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   async function getProjectsFromServer() {
     console.log("run projects");
     const resp = await axios.get("/api/v1/projects");
