@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   return (
     <header>
       <div className="left">
@@ -10,7 +10,7 @@ const Navbar = () => {
         </h2>
       </div>
       <div className="right">
-        <h2>testuser</h2>
+        <h2>{user?.username || "no user"}</h2>
       </div>
     </header>
   );

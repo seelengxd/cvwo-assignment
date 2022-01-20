@@ -22,6 +22,7 @@ const SignUp = ({ signUp }) => {
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          minLength={8}
           required
         />
       </div>
@@ -42,6 +43,7 @@ const SignUp = ({ signUp }) => {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          minLength={8}
           required
         />
       </div>

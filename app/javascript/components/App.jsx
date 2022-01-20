@@ -24,7 +24,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [currentProject, setCurrentProject] = useState({});
   const [loadingProjects, setLoadingProjects] = useState(true);
-  const [user, username] = useState({});
+  const [user, setUser] = useState({});
   async function getProjectsFromServer() {
     console.log("run projects");
     const resp = await axios.get("/api/v1/projects");
@@ -130,14 +130,14 @@ function App() {
   const signUp = (data) => {
     axios
       .post("/api/v1/users", { user: data })
-      .then((resp) => console.log(resp))
+      .then((resp) => setUser(resp.data))
       .catch((e) => console.log(e));
   };
 
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        <Navbar user={user} />
         <Routes>
           <Route
             path="/"
