@@ -23,8 +23,8 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [currentProject, setCurrentProject] = useState({});
   const [loadingProjects, setLoadingProjects] = useState(true);
+
   async function getProjectsFromServer() {
-    console.log("run projects");
     const resp = await axios.get("/api/v1/projects");
     setProjects(resp.data);
     setLoadingProjects(false);
@@ -32,6 +32,7 @@ function App() {
       addProject({ name: "Default Project" });
     }
   }
+
   async function getTasksFromServer() {
     if (!loadingProjects) {
       if (currentProject !== null) {
